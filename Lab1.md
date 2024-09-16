@@ -1,7 +1,7 @@
 Lab1
 ================
-Your Name
-2024-09-05
+Jack Sutton
+2024-09-16
 
 # Load Packages
 
@@ -27,8 +27,6 @@ library(ggplot2)
 library(ggstatsplot)
 ```
 
-    ## Warning: package 'ggstatsplot' was built under R version 4.3.3
-
     ## You can cite this package as:
     ##      Patil, I. (2021). Visualizations with statistical details: The 'ggstatsplot' approach.
     ##      Journal of Open Source Software, 6(61), 3167, doi:10.21105/joss.03167
@@ -36,8 +34,6 @@ library(ggstatsplot)
 ``` r
 library(psych)
 ```
-
-    ## Warning: package 'psych' was built under R version 4.3.3
 
     ## 
     ## Attaching package: 'psych'
@@ -51,7 +47,7 @@ library(bruceR)
 ```
 
     ## 
-    ## bruceR (v2023.9)
+    ## bruceR (v2024.6)
     ## Broadly Useful Convenient and Efficient R functions
     ## 
     ## Packages also loaded:
@@ -76,32 +72,19 @@ library(bruceR)
     ## https://psychbruce.github.io/bruceR
     ## 
     ## To use this package in publications, please cite:
-    ## Bao, H.-W.-S. (2023). bruceR: Broadly useful convenient and efficient R functions (Version 2023.9) [Computer software]. https://CRAN.R-project.org/package=bruceR
-
-    ## 
-    ## NEWS: A new version of bruceR (2024.6) is available (2024-06-13)!
-    ## 
-    ## ***** Please update *****
-    ## install.packages("bruceR", dep=TRUE)
+    ## Bao, H.-W.-S. (2024). bruceR: Broadly useful convenient and efficient R functions (Version 2024.6) [Computer software]. https://CRAN.R-project.org/package=bruceR
 
     ## 
     ## These packages are dependencies of `bruceR` but not installed:
-    ## - pacman, lmtest, vars, phia, GPArotation
+    ## - pacman, openxlsx, ggtext, see, lmtest, vars, phia, MuMIn, GGally
     ## 
     ## ***** Install all dependencies *****
     ## install.packages("bruceR", dep=TRUE)
 
 ``` r
 library(ggsci)
-```
-
-    ## Warning: package 'ggsci' was built under R version 4.3.3
-
-``` r
 library(datasauRus)
 ```
-
-    ## Warning: package 'datasauRus' was built under R version 4.3.3
 
 # First look of descriptive statistics
 
@@ -137,11 +120,29 @@ datasaurus_dozen %>%
 
 ``` r
 ggplot(datasaurus_dozen, aes(x = x, y = y, colour = dataset))+
-    geom_point()
+    geom_point() + facet_wrap(~dataset)
 ```
 
 ![](Lab1_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
 
+``` r
+dino<- datasaurus_dozen %>%
+  filter (dataset == "dino")
+
+ggplot(dino, aes(x = x, y = y))+
+    geom_point(color = "#FF00FF")+theme_void() + labs(title = "Hi, I'm a Dino!") + theme(plot.title=element_text(hjust=0.5, face="bold", size=20, color = "pink"))
+```
+
+![](Lab1_files/figure-gfm/unnamed-chunk-3-2.png)<!-- -->
+
 # Q1: What is the function of facet wrap? In what situation do you think you will use this function?
 
+Facet wraps present each category as its own individual graph. We’ll use
+this to separate categories of interest and group them when we want to
+visualize certain relationships or variables.
+
 # Q2: The means, standard deviations, and correlations are pretty much the same, but the data pattern looks very different for each dataset. What is the implication here?
+
+It implies that data visualization is important to discern otherwise
+similar data sets. If we hadn’t separated them with facet wrap and
+visualized them, we might wrongly assume they are similar/same.

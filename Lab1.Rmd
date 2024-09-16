@@ -1,7 +1,7 @@
 ---
 title: "Lab1"
-author: "Your Name"
-date: "2024-09-05"
+author: "Jack Sutton"
+date: "2024-09-16"
 output: "github_document"
 ---
 
@@ -39,15 +39,22 @@ datasaurus_dozen %>%
 ```{r}
 
 ggplot(datasaurus_dozen, aes(x = x, y = y, colour = dataset))+
-    geom_point()
+    geom_point() + facet_wrap(~dataset)
+
+dino<- datasaurus_dozen %>%
+  filter (dataset == "dino")
+
+ggplot(dino, aes(x = x, y = y))+
+    geom_point(color = "#FF00FF")+theme_void() + labs(title = "Hi, I'm a Dino!") + theme(plot.title=element_text(hjust=0.5, face="bold", size=20, color = "pink"))
 
 
 ```
 
-
 # Q1: What is the function of facet wrap? In what situation do you think you will use this function? 
 
-
+Facet wraps present each category as its own individual graph. We'll use this to separate categories of interest and group them when we want to visualize certain relationships or variables.
 
 
 # Q2: The means, standard deviations, and correlations are pretty much the same, but the data pattern looks very different for each dataset. What is the implication here? 
+
+It implies that data visualization is important to discern otherwise similar data sets. If we hadn't separated them with facet wrap and visualized them, we might wrongly assume they are similar/same.
